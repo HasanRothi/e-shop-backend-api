@@ -10,11 +10,6 @@ export class AppController {
     return this.appService.getHello();
   }
 
-  @Get(':name')
-  getGuest(@Param('name')guestName): {} {
-    return this.appService.getGuest(guestName)
-  }
-
   @Post('me')
   addUser(@Body('name')userName , @Body('gmail')userGmail): {} {
     return this.appService.addUser(userName,userGmail)

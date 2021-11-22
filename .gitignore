@@ -6,6 +6,7 @@
 
 api.rest
 .env
+test
 # Logs
 logs
 *.log
