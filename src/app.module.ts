@@ -8,6 +8,7 @@ import { SentryModule } from '@ntegral/nestjs-sentry';
 import { LogLevel } from '@sentry/types';
 
 import { AuthenticationMiddleware , LoggerMiddleware } from './middleware'
+import { UsersModule } from './users/users.module';
 @Module({
   imports: [ConfigModule.forRoot(), 
     ProductsModule , 
@@ -18,7 +19,8 @@ import { AuthenticationMiddleware , LoggerMiddleware } from './middleware'
       environment: 'dev' || 'production',
       release: 'some_release' || null,
       logLevel: LogLevel.Debug
-    })
+    }),
+    UsersModule
   ],
   controllers: [AppController],
   providers: [AppService],

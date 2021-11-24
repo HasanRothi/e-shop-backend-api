@@ -1,4 +1,4 @@
-import { isNotEmpty, IsNotEmpty, IsNumber, IsOptional, Length } from "class-validator"
+import { IsNotEmpty, IsNumber, IsOptional, Length } from "class-validator"
 
 export class CreateProductDto {
     @IsNotEmpty({message: "Provide product name"})

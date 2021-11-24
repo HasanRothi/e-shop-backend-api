@@ -4,7 +4,7 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 // import { HttpExceptionFilter } from './utils/http-exception.filter';
 import { ValidationPipe } from '@nestjs/common';
 import { SentryService } from '@ntegral/nestjs-sentry';
-
+import * as cookieParser from 'cookie-parser';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const corsOption = {
@@ -22,6 +22,7 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, document);
   app.useLogger(app.get(SentryService));
   app.useGlobalPipes(new ValidationPipe());
+  app.use(cookieParser())
   // app.useGlobalFilters(new HttpExceptionFilter());
   await app.listen(3000);
 }
