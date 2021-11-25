@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete,Res } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete,Res, ParseIntPipe } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -34,5 +34,19 @@ export class UsersController {
     } else {
       throw new Error('Login failed')
     }
+  }
+  @Post('logout')
+  async logout(@Body('email')email,@Body('password')password,@Res({passthrough: true}) response : Response) {
+    const data = await this.usersService.logout(email,password)
+    if(data) {
+    response.cookie('token','',{httpOnly: true , maxAge: 0})
+    return data;
+    } else {
+      throw new Error('Logout failed')
+    }
+  }
+  @Post('buy')
+  async buy(@Body('products')products : []) {
+    return this.usersService.buy(products)
   }
 }
